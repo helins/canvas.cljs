@@ -10,7 +10,11 @@
 ;;;;;;;;;; Gathering declarations
 
 
-(declare move)
+(declare color-shadow
+         move
+         shadow-blur
+         shadow-x
+         shadow-y)
 
 
 ;;;;;;;;;; Handling contextes
@@ -227,6 +231,23 @@
 
 
 
+(defn color-shadow
+
+  ""
+
+  ([ctx]
+
+   (.-shadowColor ctx))
+
+
+  ([ctx color]
+
+   (set! (.-shadowColor ctx)
+         color)
+   ctx))
+
+
+
 (defn color-stroke
 
   ""
@@ -283,6 +304,79 @@
 
    (set! (.-lineWidth ctx)
          width)
+   ctx))
+
+
+
+(defn shadow
+
+  ""
+
+  ([ctx blur x-offset y-offset]
+
+   (-> ctx
+       (shadow-blur blur)
+       (shadow-x x-offset)
+       (shadow-y y-offset)))
+
+   
+  ([ctx blur x-offset y-offset color]
+
+   (-> ctx
+       (shadow blur
+               x-offset
+               y-offset)
+       (color-shadow color))))
+
+
+
+(defn shadow-blur
+
+  ""
+
+  ([ctx]
+
+   (.-shadowBlur ctx))
+
+
+  ([ctx blur]
+
+   (set! (.-shadowBlur ctx)
+         blur)
+   ctx))
+
+
+
+(defn shadow-x
+
+  ""
+
+  ([ctx]
+
+   (.-shadowOffsetX ctx))
+
+
+  ([ctx x-offset]
+
+   (set! (.-shadowOffsetX ctx)
+         x-offset)
+   ctx))
+
+
+
+(defn shadow-y
+
+  ""
+
+  ([ctx]
+
+   (.-shadowOffsetY ctx))
+
+
+  ([ctx y-offset]
+
+   (set! (.-shadowOffsetY ctx)
+         y-offset)
    ctx))
 
 
