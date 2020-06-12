@@ -14,8 +14,9 @@
   [ctx]
 
   (-> ctx
-      (draw/alpha 0.5)
-      (draw/color-fill "black")
+      (draw/color-fill (draw/grad-linear ctx 0 0 1000 400 [[0   "black"]
+                                                           [0.5 "blue"]
+                                                           [1   "black"]]))
       (draw/rect-fill 0 0 1000 400)
       (draw/color-fill "white")
       (draw/color-stroke "grey")

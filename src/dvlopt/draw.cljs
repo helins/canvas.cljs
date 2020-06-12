@@ -142,6 +142,76 @@
    ctx)
 
 
+;;;;;;;;;; Gradients
+
+
+(defn- -add-color-stops
+
+  ""
+
+  [grad color-stops]
+
+  (doseq [[stop
+           color] color-stops]
+    (.addColorStop grad
+                   stop
+                   color))
+  grad)
+
+
+
+(defn grad-linear
+
+  ""
+
+  [ctx x-1 y-1 x-2 y-2 color-stops]
+
+  (-add-color-stops (.createLinearGradient ctx
+                                           x-1
+                                           y-1
+                                           x-2
+                                           y-2)
+                    color-stops))
+
+
+
+(defn grad-radial
+
+  ""
+
+  [ctx x-1 y-1 radius-1 x-2 y-2 radius-2 color-stops]
+
+  (-add-color-stops (.createRadialGradient ctx
+                                           x-1
+                                           y-1
+                                           radius-1
+                                           x-2
+                                           y-2
+                                           radius-2)
+                    color-stops))
+
+
+
+(defn pattern
+
+  ""
+
+  ([ctx source]
+
+   (pattern ctx
+            source
+            nil))
+
+
+  ([ctx source repeat]
+
+   (.createPattern ctx
+                   source
+                   (or repeat
+                       "repeat"))))
+
+
+
 ;;;;;;;;;; Paths
 
 
@@ -479,7 +549,7 @@
   ([ctx enabled?]
 
    (set! (.-imageSmoothingEnabled ctx)
-         enabled)
+         enabled?)
    ctx))
 
 
