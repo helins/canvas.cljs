@@ -13,51 +13,7 @@
 (declare move)
 
 
-;;;;;;;;;; Core Canvas API
-
-
-(defn arc
-
-  ""
-
-  ([ctx x y radius angle-start angle-end]
-
-   (arc ctx
-        x
-        y
-        radius
-        angle-start
-        angle-end
-        nil))
-
-
-  ([ctx x y radius angle-start angle-end anti-clockwise?]
-
-   (.arc ctx
-         x
-         y
-         radius
-         angle-start
-         angle-end
-         anti-clockwise?)
-   ctx))
-
-
-
-(defn arc-ctrl
-
-  ""
-
-  [ctx x-1 y-1 x-2 y-2 radius]
-
-  (.arcTo ctx
-          x-1
-          y-1
-          x-2
-          y-2
-          radius)
-  ctx)
-
+;;;;;;;;;; Handling contextes
 
 
 (defn begin
@@ -77,58 +33,6 @@
    (move ctx
          x
          y)))
-
-
-
-(defn bezier-1
-
-  ""
-
-  ;; Quadratic Bézier
-
-  ([ctx x-cp y-cp x-end y-end]
-
-   (.quadraticCurveTo ctx
-                      x-cp
-                      y-cp
-                      x-end
-                      y-end)
-   ctx)
-
-
-  ([ctx x-start y-start x-cp y-cp x-end y-end]
-
-   (-> ctx
-       (move x-start
-             y-start)
-       (bezier-1 x-cp y-cp x-end y-end))))
-
-
-
-(defn bezier-2
-
-  ""
-
-  ;; Cubic Bézier
-
-  ([ctx x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
-
-   (.bezierCurveTo ctx
-                   x-cp-1
-                   y-cp-1
-                   x-cp-2
-                   y-cp-2
-                   x-end
-                   y-end)
-   ctx)
-
-
-  ([ctx x-start y-start x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
-
-   (-> ctx
-       (move x-start
-             y-start)
-       (bezier-2 x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end))))
 
 
 
@@ -165,6 +69,93 @@
 
 
 
+(defn close
+
+  ""
+
+  [ctx]
+
+  (.closePath ctx)
+  ctx)
+
+
+
+(defn fill
+
+  ""
+
+  ([ctx]
+
+   (fill ctx
+         nil))
+
+
+  ([ctx fill-rule]
+
+   (.fill ctx
+          fill-rule)
+   ctx))
+
+
+
+(defn rect-fill
+
+  ""
+
+  [ctx x y width height]
+
+  (.fillRect ctx
+             x
+             y
+             width
+             height)
+  ctx)
+
+
+
+(defn rect-stroke
+
+  ""
+
+  [ctx x y width height]
+
+  (.strokeRect ctx
+               x
+               y
+               width
+               height)
+  ctx)
+
+
+
+(defn stroke
+
+  ""
+
+  [ctx]
+
+   (.stroke ctx)
+   ctx)
+
+
+;;;;;;;;;; Paths
+
+
+(defn path
+
+  ""
+
+  ([]
+
+   (js/Path2D.))
+
+
+  ([source]
+   ;; Either an existing path which will be copied or a SVG path (string).
+   (js/Path2D. source)))
+
+
+
 (defn clip-path
 
   ""
@@ -185,15 +176,38 @@
 
 
 
-(defn close
+(defn path-fill
 
   ""
 
-  [ctx]
+  ([ctx path]
 
-  (.closePath ctx)
+   (path-fill ctx
+              path
+              nil))
+
+
+  ([ctx path fill-rule]
+
+   (.fill ctx
+          path
+          fill-rule)
+   ctx))
+
+
+
+(defn path-stroke
+
+  ""
+
+  [ctx path]
+
+  (.stroke ctx
+           path)
   ctx)
 
+
+;;;;;;;;;; Styling
 
 
 (defn color-fill
@@ -227,78 +241,6 @@
    (set! (.-strokeStyle ctx)
          color)
    ctx))
-
-
-
-(defn ellipse
-
-  ""
-
-  ([ctx x y radius-x radius-y rotation angle-start angle-end]
-
-   (ellipse ctx
-            x
-            y
-            radius-y
-            radius-y
-            rotation
-            angle-start
-            angle-end
-            nil))
-
-
-  ([ctx x y radius-x radius-y rotation angle-start angle-end anti-clockwise?]
-
-   (.ellipse ctx
-             x
-             y
-             radius-x
-             radius-y
-             rotation
-             angle-start
-             angle-end
-             anti-clockwise?)
-   ctx))
-
-
-
-(defn fill
-
-  ""
-
-  ([ctx]
-
-   (fill ctx
-         nil))
-
-
-  ([ctx fill-rule]
-
-   (.fill ctx
-          fill-rule)
-   ctx))
-
-
-
-(defn line
-
-  ""
-
-  ([ctx x y]
-
-   (.lineTo ctx
-            x
-            y)
-   ctx)
-
-
-  ([ctx x-1 y-1 x-2 y-2]
-
-   (-> ctx
-       (move x-1
-             y-1)
-       (line x-2
-             y-2))))
 
 
 
@@ -345,122 +287,6 @@
 
 
 
-(defn matrix
-
-  ""
-
-  ([ctx]
-
-   (.getTransform ctx))
-
-
-  ([ctx m]
-
-   (.setTransform ctx
-                  m)
-   ctx)
-
-
-  ([ctx a b c d e f]
-   
-   (.setTransform ctx a b c d e f)
-   ctx))
-
-
-
-(defn move
-
-  ""
-
-  [ctx x y]
-
-  (.moveTo ctx
-           x
-           y)
-  ctx)
-
-
-
-(defn rotate
-
-  ""
-
-  [ctx radians]
-
-  (.rotate ctx
-           radians)
-  ctx)
-
-
-
-(defn rect
-
-  ""
-
-  [ctx x y width height]
-
-  (.rect ctx
-         x
-         y
-         width
-         height)
-  ctx)
-
-
-
-(defn rect-fill
-
-  ""
-
-  [ctx x y width height]
-
-  (.fillRect ctx
-             x
-             y
-             width
-             height)
-  ctx)
-
-
-
-(defn rect-stroke
-
-  ""
-
-  [ctx x y width height]
-
-  (.strokeRect ctx
-               x
-               y
-               width
-               height)
-  ctx)
-
-
-
-(defn scale
-
-  ""
-
-  [ctx x y]
-
-  (.scale ctx
-          x
-          y)
-  ctx)
-
-
-
-(defn stroke
-
-  ""
-
-  [ctx]
-
-   (.stroke ctx)
-   ctx)
-
-
 (defn style-pop
 
   ""
@@ -482,89 +308,184 @@
   ctx)
 
 
-
-(defn transform
-
-  ""
-
-  ([ctx a b c d e f]
-
-   (.transform ctx a b c d e f)
-   ctx))
+;;;;;;;;;; Subpaths
 
 
-
-
-(defn transform-reset
+(defn arc
 
   ""
 
-  [ctx]
+  ([path x y radius angle-start angle-end]
 
-  (.setTransform ctx 1 0 0 1 0 0)
-  ctx)
-
-
-
-(defn translate
-
-  ""
-
-  [ctx x y]
-
-  (.translate ctx
-              x
-              y)
-  ctx)
+   (arc path
+        x
+        y
+        radius
+        angle-start
+        angle-end
+        nil))
 
 
-;;;;;;;;;; Paths
+  ([path x y radius angle-start angle-end anti-clockwise?]
 
-
-(defn path
-
-  ""
-
-  ([]
-
-   (js/Path2D.))
-
-
-  ([source]
-   ;; Either an existing path which will be copied or a SVG path (string).
-   (js/Path2D. source)))
+   (.arc path
+         x
+         y
+         radius
+         angle-start
+         angle-end
+         anti-clockwise?)
+   path))
 
 
 
-(defn path-fill
+(defn arc-ctrl
 
   ""
 
-  ([ctx path]
+  [path x-1 y-1 x-2 y-2 radius]
 
-   (path-fill ctx
-              path
-              nil))
-
-
-  ([ctx path fill-rule]
-
-   (.fill ctx
-          path
-          fill-rule)
-   ctx))
+  (.arcTo path
+          x-1
+          y-1
+          x-2
+          y-2
+          radius)
+  path)
 
 
 
-(defn path-stroke
+(defn bezier-1
 
   ""
 
-  [ctx path]
+  ;; Quadratic Bézier
 
-  (.stroke ctx
-           path)
-  ctx)
+  ([path x-cp y-cp x-end y-end]
+
+   (.quadraticCurveTo path
+                      x-cp
+                      y-cp
+                      x-end
+                      y-end)
+   path)
+
+
+  ([path x-start y-start x-cp y-cp x-end y-end]
+
+   (-> path 
+       (move x-start
+             y-start)
+       (bezier-1 x-cp y-cp x-end y-end))))
+
+
+
+(defn bezier-2
+
+  ""
+
+  ;; Cubic Bézier
+
+  ([path x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
+
+   (.bezierCurveTo path 
+                   x-cp-1
+                   y-cp-1
+                   x-cp-2
+                   y-cp-2
+                   x-end
+                   y-end)
+   path)
+
+
+  ([path x-start y-start x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
+
+   (-> path
+       (move x-start
+             y-start)
+       (bezier-2 x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end))))
+
+
+
+(defn ellipse
+
+  ""
+
+  ([path x y radius-x radius-y rotation angle-start angle-end]
+
+   (ellipse path 
+            x
+            y
+            radius-y
+            radius-y
+            rotation
+            angle-start
+            angle-end
+            nil))
+
+
+  ([path x y radius-x radius-y rotation angle-start angle-end anti-clockwise?]
+
+   (.ellipse path 
+             x
+             y
+             radius-x
+             radius-y
+             rotation
+             angle-start
+             angle-end
+             anti-clockwise?)
+   path))
+
+
+
+(defn line
+
+  ""
+
+  ([path x y]
+
+   (.lineTo path
+            x
+            y)
+   path)
+
+
+  ([path x-1 y-1 x-2 y-2]
+
+   (-> path
+       (move x-1
+             y-1)
+       (line x-2
+             y-2))))
+
+
+
+(defn move
+
+  ""
+
+  [path x y]
+
+  (.moveTo path 
+           x
+           y)
+  path)
+
+
+
+(defn rect
+
+  ""
+
+  [path x y width height]
+
+  (.rect path
+         x
+         y
+         width
+         height)
+  path)
 
 
 ;;;;;;;;;; Text
@@ -666,6 +587,91 @@
                 y
                 max-width)
    ctx))
+
+
+;;;;;;;;;; Spatial transformations
+
+
+(defn matrix
+
+  ""
+
+  ([ctx]
+
+   (.getTransform ctx))
+
+
+  ([ctx m]
+
+   (.setTransform ctx
+                  m)
+   ctx)
+
+
+  ([ctx a b c d e f]
+   
+   (.setTransform ctx a b c d e f)
+   ctx))
+
+
+
+(defn matrix-reset
+
+  ""
+
+  [ctx]
+
+  (.setTransform ctx 1 0 0 1 0 0)
+  ctx)
+
+
+
+(defn rotate
+
+  ""
+
+  [ctx radians]
+
+  (.rotate ctx
+           radians)
+  ctx)
+
+
+
+(defn scale
+
+  ""
+
+  [ctx x y]
+
+  (.scale ctx
+          x
+          y)
+  ctx)
+
+
+
+(defn transform
+
+  ""
+
+  ([ctx a b c d e f]
+
+   (.transform ctx a b c d e f)
+   ctx))
+
+
+
+(defn translate
+
+  ""
+
+  [ctx x y]
+
+  (.translate ctx
+              x
+              y)
+  ctx)
 
 
 ;;;;;;;;;; Additional utilities
