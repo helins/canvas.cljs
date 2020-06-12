@@ -135,6 +135,46 @@
 
 
 
+(defn paste
+
+  ""
+
+  ([ctx src x-dest y-dest]
+
+   (.drawImage ctx
+               src
+               x-dest
+               y-dest)
+   ctx)
+
+
+  ([ctx src x-dest y-dest width-dest height-dest]
+
+   (.drawImage ctx
+               src
+               x-dest
+               y-dest
+               width-dest
+               height-dest)
+   ctx)
+
+
+  ([ctx src x-src y-src width-src height-src x-dest y-dest width height]
+
+   (.drawImage ctx
+               src
+               x-src
+               y-src
+               width-src
+               height-src
+               x-dest
+               y-dest
+               width
+               height)
+   ctx))
+
+
+
 (defn rect-fill
 
   ""
@@ -229,17 +269,17 @@
 
   ""
 
-  ([ctx source]
+  ([ctx src]
 
    (pattern ctx
-            source
+            src
             nil))
 
 
-  ([ctx source repeat]
+  ([ctx src repeat]
 
    (.createPattern ctx
-                   source
+                   src
                    (or repeat
                        "repeat"))))
 
@@ -899,6 +939,17 @@
               y
               max-width)
    ctx))
+
+
+
+(defn text-measure
+
+  ""
+
+  [ctx text]
+
+  (.measureText ctx
+                text))
 
 
 

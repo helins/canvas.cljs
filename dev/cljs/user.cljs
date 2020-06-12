@@ -9,6 +9,14 @@
 ;;;;;;;;;;
   
 
+(def img
+     (js/Image.))
+
+
+(set! (.-src img)
+      "https://media.mnn.com/assets/images/2018/04/LItSL_4.jpg.990x0_q80_crop-smart.jpg")
+
+
 (defn draw-frame
 
   [ctx]
@@ -18,6 +26,10 @@
                                                            [0.5 "blue"]
                                                            [1   "black"]]))
       (draw/rect-fill 0 0 1000 400)
+      (draw/smoothing? true)
+      (draw/paste img
+                  500
+                  0)
       (draw/color-fill "white")
       (draw/color-stroke "grey")
       (draw/line-width 2)
