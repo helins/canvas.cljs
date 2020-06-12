@@ -265,13 +265,31 @@
 
 
 
+(defn line-cap
+
+  ""
+
+  ([ctx]
+
+   (.-lineCap ctx))
+
+
+  ([ctx cap]
+
+   (set! (.-lineCap ctx)
+         cap)
+   ctx))
+
+
+
 (defn line-dash
 
   ""
 
   ([ctx]
 
-   (.getLineDash ctx))
+   [(.getLineDash ctx)
+    (.-lineDashOffset ctx)])
 
 
   ([ctx segments]
@@ -291,6 +309,23 @@
 
 
 
+(defn line-join
+
+  ""
+
+  ([ctx]
+
+   (.-lineJoin ctx))
+
+
+  ([ctx join]
+
+   (set! (.-lineJoin ctx)
+         join)
+   ctx))
+
+
+
 (defn line-width
 
   ""
@@ -304,6 +339,23 @@
 
    (set! (.-lineWidth ctx)
          width)
+   ctx))
+
+
+
+(defn miter-limit
+
+  ""
+
+  ([ctx]
+
+   (.-miterLimit ctx))
+
+
+  ([ctx limit]
+
+   (set! (.-miterLimit ctx)
+         limit)
    ctx))
 
 

@@ -50,14 +50,12 @@
     (frame)
     (def frame
       (draw/on-frame (fn draw [_timestamp]
-                       (draw-frame ctx)))))
-
-                       ;(try
-                       ;  (draw-frame ctx)
-                       ;  true
-                       ;  (catch :default e
-                       ;    (js/console.log "err" e)
-                       ;    false))))))
+                       (try
+                         (draw-frame ctx)
+                         true
+                         (catch :default e
+                           (js/console.log "err" e)
+                           false))))))
 
 
   )
