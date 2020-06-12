@@ -4,7 +4,8 @@
 
   {:author "Adam Helinski"}
 
-  (:require-macros [dvlopt.draw]))
+  (:require-macros [dvlopt.draw])
+  (:refer-clojure :exclude [contains?]))
 
 
 ;;;;;;;;;; Gathering declarations
@@ -55,6 +56,17 @@
 
 
 
+(defn contains?
+
+  ""
+
+  [ctx x y]
+
+  (.isPointInStoke ctx
+                   x
+                   y))
+
+
 (defn clip
 
   ""
@@ -81,6 +93,27 @@
 
   (.closePath ctx)
   ctx)
+
+
+
+(defn encloses?
+
+  ""
+
+  ([ctx x y]
+
+   (encloses? ctx
+              x
+              y
+              nil))
+
+
+  ([ctx x y fill-rule]
+
+   (.isPointInPath ctx
+                   x
+                   y
+                   fill-rule)))
 
 
 
@@ -230,13 +263,13 @@
 
 
 
-(defn clip-path
+(defn path-clip
 
   ""
 
   ([ctx path]
 
-   (clip-path ctx
+   (path-clip ctx
               path
               nil))
 
@@ -247,6 +280,42 @@
           path
           fill-rule)
     ctx))
+
+
+
+(defn path-contains?
+
+  ""
+
+  ([ctx path x y]
+
+   (.isPointInStoke ctx
+                    path
+                    x
+                    y)))
+
+
+
+(defn path-encloses?
+
+  ""
+
+  ([ctx path x y]
+
+   (path-encloses? ctx
+                   path
+                   x
+                   y
+                   nil))
+
+
+  ([ctx path x y fill-rule?]
+
+   (.isPointInPath ctx
+                   path
+                   x
+                   y
+                   fill-rule?)))
 
 
 
