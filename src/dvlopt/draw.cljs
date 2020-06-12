@@ -28,7 +28,7 @@
         radius
         angle-start
         angle-end
-        false))
+        nil))
 
 
   ([ctx x y radius angle-start angle-end anti-clockwise?]
@@ -68,6 +68,58 @@
 
   (.beginPath ctx)
   ctx)
+
+
+
+(defn bezier-1
+
+  ""
+
+  ;; Quadratic Bézier
+
+  ([ctx x-cp y-cp x-end y-end]
+
+   (.quadraticCurveTo ctx
+                      x-cp
+                      y-cp
+                      x-end
+                      y-end)
+   ctx)
+
+
+  ([ctx x-start y-start x-cp y-cp x-end y-end]
+
+   (-> ctx
+       (position x-start
+                 y-start)
+       (bezier-1 x-cp y-cp x-end y-end))))
+
+
+
+(defn bezier-2
+
+  ""
+
+  ;; Cubic Bézier
+
+  ([ctx x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
+
+   (.bezierCurveTo ctx
+                   x-cp-1
+                   y-cp-1
+                   x-cp-2
+                   y-cp-2
+                   x-end
+                   y-end)
+   ctx)
+
+
+  ([ctx x-start y-start x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
+
+   (-> ctx
+       (position x-start
+                 y-start)
+       (bezier-2 x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end))))
 
 
 
