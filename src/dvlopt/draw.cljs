@@ -4,8 +4,13 @@
 
   {:author "Adam Helinski"}
 
+  (:require [cljs.core :as cljs])
   (:require-macros [dvlopt.draw])
-  (:refer-clojure :exclude [contains?]))
+  ;;
+  ;; <!> Attention, can be confusing if not kept in mind <!>
+  ;;
+  (:refer-clojure :exclude [->
+                            contains?]))
 
 
 ;; TODO. ImageDate.
@@ -582,19 +587,19 @@
 
   ([ctx blur x-offset y-offset]
 
-   (-> ctx
-       (shadow-blur blur)
-       (shadow-x x-offset)
-       (shadow-y y-offset)))
+   (cljs/-> ctx
+            (shadow-blur blur)
+            (shadow-x x-offset)
+            (shadow-y y-offset)))
 
    
   ([ctx blur x-offset y-offset color]
 
-   (-> ctx
-       (shadow blur
-               x-offset
-               y-offset)
-       (color-shadow color))))
+   (cljs/-> ctx
+            (shadow blur
+                    x-offset
+                    y-offset)
+            (color-shadow color))))
 
 
 
@@ -752,10 +757,10 @@
 
   ([path x-start y-start x-cp y-cp x-end y-end]
 
-   (-> path 
-       (move x-start
-             y-start)
-       (bezier-1 x-cp y-cp x-end y-end))))
+   (cljs/-> path 
+            (move x-start
+                  y-start)
+            (bezier-1 x-cp y-cp x-end y-end))))
 
 
 
@@ -779,10 +784,10 @@
 
   ([path x-start y-start x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
 
-   (-> path
-       (move x-start
-             y-start)
-       (bezier-2 x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end))))
+   (cljs/-> path
+            (move x-start
+                  y-start)
+            (bezier-2 x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end))))
 
 
 
@@ -832,11 +837,11 @@
 
   ([path x-1 y-1 x-2 y-2]
 
-   (-> path
-       (move x-1
-             y-1)
-       (line x-2
-             y-2))))
+   (cljs/-> path
+            (move x-1
+                  y-1)
+            (line x-2
+                  y-2))))
 
 
 

@@ -10,30 +10,28 @@
 ;;;;;;;;;; Macros
 
 
-(defmacro chain
+(defmacro ->
 
   ""
 
-  [[ctx state] & forms]
+  [[ctx & args] & forms]
 
-  (let [sym-ctx   (gensym)
-        sym-state (gensym)
-        nest      (fn nest [[form & forms]]
-                    (when form
-                      `(let [~sym-state ~(if (symbol? form)
-                                           (list form
-                                                 sym-ctx
-                                                 sym-state)
-                                           (list* (first form)
-                                                  sym-ctx
-                                                  sym-state
-                                                  (rest form)))]
-                         ~(nest forms))))]
-                                                
+  (let [pre-args  (cons ctx
+                        args)
+        syms      (take (count pre-args)
+                        (repeatedly gensym))]
+    `(let ~(vec (interleave syms
+                            pre-args))
+       ~@(map (fn add-pre-args [form]
+                (if (symbol? form)
+                  (list* form
+                         syms)
+                  (cons (first form)
+                        (concat syms
+                                (rest form)))))
+              forms)
+       ~(first syms))))
 
-    `(let [~sym-ctx   ~ctx
-           ~sym-state ~state]
-       ~(nest forms))))
 
 
 (defmacro subspace
