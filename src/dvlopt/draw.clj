@@ -2,7 +2,9 @@
 
   ""
 
-  {:author "Adam Helinski"})
+  {:author "Adam Helinski"}
+
+  (:refer-clojure :exclude [->]))
 
 
 ;;;;;;;;;; Macros
@@ -34,32 +36,16 @@
        ~(nest forms))))
 
 
-
-
-(defmacro style-preserve
+(defmacro subspace
 
   ""
 
-  [ctx & forms]
+  [[ctx] & forms]
 
-  `(let [ctx# ~ctx]
-     (dvlopt.draw/style-save ctx#)
-     ~@forms
-     (dvlopt.draw/style-pop ctx#)))
-
-
-
-(defmacro with-translation
-
-  ""
-
-  [[ctx x y] & forms]
-
-  `(let [ctx# ~ctx]
-     (dvlopt.draw/translate ctx#
-                            ~x
-                            ~y)
-     ~@forms
-     (dvlopt.draw/translate ctx#
-                            (- ~x)
-                            (- ~y))))
+  `(let [ctx#    ~ctx
+         matrix# (dvlopt.draw/matrix ctx#)
+         ret#    (do
+                   ~@forms)]
+     (dvlopt.draw/matrix ctx#
+                         matrix#)
+     ret#))

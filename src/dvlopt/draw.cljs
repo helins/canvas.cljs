@@ -8,6 +8,9 @@
   (:refer-clojure :exclude [contains?]))
 
 
+;; TODO. ImageDate.
+
+
 ;;;;;;;;;; Gathering declarations
 
 
@@ -942,7 +945,7 @@
 
 
 
-(defn text-measure
+(defn text-metrics
 
   ""
 
@@ -1002,6 +1005,17 @@
 
 
 
+(defn matrix-mult
+
+  ""
+
+  [ctx a b c d e f]
+
+  (.transform ctx a b c d e f)
+  ctx)
+
+
+
 (defn matrix-reset
 
   ""
@@ -1038,14 +1052,27 @@
 
 
 
-(defn transform
+(defn scale-x
 
   ""
 
-  ([ctx a b c d e f]
+  [ctx x]
 
-   (.transform ctx a b c d e f)
-   ctx))
+  (scale ctx
+         x
+         1))
+
+
+
+(defn scale-y
+
+  ""
+
+  [ctx y]
+
+  (scale ctx
+         1
+         y))
 
 
 
@@ -1059,6 +1086,31 @@
               x
               y)
   ctx)
+
+
+
+(defn translate-x
+
+  ""
+
+  [ctx x]
+
+  (translate ctx
+             x
+             0))
+
+
+
+(defn translate-y
+
+  ""
+
+  [ctx y]
+
+  (translate ctx
+             0
+             y))
+
 
 
 ;;;;;;;;;; Additional utilities
