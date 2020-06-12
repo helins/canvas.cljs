@@ -10,7 +10,7 @@
 ;;;;;;;;;; Gathering declarations
 
 
-(declare position)
+(declare move)
 
 
 ;;;;;;;;;; Core Canvas API
@@ -64,10 +64,19 @@
 
   ""
 
-  [ctx]
+  ([ctx]
 
-  (.beginPath ctx)
-  ctx)
+   (begin ctx
+          0
+          0))
+
+
+  ([ctx x y]
+
+   (.beginPath ctx)
+   (move ctx
+         x
+         y)))
 
 
 
@@ -90,8 +99,8 @@
   ([ctx x-start y-start x-cp y-cp x-end y-end]
 
    (-> ctx
-       (position x-start
-                 y-start)
+       (move x-start
+             y-start)
        (bezier-1 x-cp y-cp x-end y-end))))
 
 
@@ -117,9 +126,62 @@
   ([ctx x-start y-start x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end]
 
    (-> ctx
-       (position x-start
-                 y-start)
+       (move x-start
+             y-start)
        (bezier-2 x-cp-1 y-cp-1 x-cp-2 y-cp-2 x-end y-end))))
+
+
+
+(defn clear
+
+  ""
+
+  [ctx x y width height]
+
+  (.clearRect ctx
+              x
+              y
+              width
+              height)
+  ctx)
+
+
+
+(defn clip
+
+  ""
+
+  ([ctx]
+
+   (clip ctx
+         nil))
+
+
+  ([ctx fill-rule]
+
+   (.clip ctx
+          fill-rule)
+   ctx))
+
+
+
+(defn clip-path
+
+  ""
+
+  ([ctx path]
+
+   (clip-path ctx
+              path
+              nil))
+
+
+  ([ctx path fill-rule]
+
+   (.clip ctx
+          path
+          fill-rule)
+    ctx))
 
 
 
@@ -200,20 +262,48 @@
 
 
 
+(def even-odd
+
+  ""
+
+  "evenodd")
+
+
+
 (defn fill
 
   ""
 
   ([ctx]
 
-   (.fill ctx)
-   ctx)
+   (fill ctx
+         nil))
 
+
+  ([ctx fill-rule]
+
+   (.fill ctx
+          fill-rule)
+   ctx))
+
+
+
+(defn fill-path
+
+  ""
 
   ([ctx path]
 
+   (fill-path ctx
+              path
+              nil))
+
+
+  ([ctx path fill-rule]
+
    (.fill ctx
-          path)
+          path
+          fill-rule)
    ctx))
 
 
@@ -233,8 +323,8 @@
   ([ctx x-1 y-1 x-2 y-2]
 
    (-> ctx
-       (position x-1
-                 y-1)
+       (move x-1
+             y-1)
        (line x-2
              y-2))))
 
@@ -306,6 +396,14 @@
 
 
 
+(def non-zero
+
+  ""
+
+  "nonzero")
+
+
+
 (defn path
 
   ""
@@ -321,7 +419,7 @@
 
 
 
-(defn position
+(defn move
 
   ""
 
@@ -479,6 +577,21 @@
 
 
 ;;;;;;;;;; Additional utilities
+
+
+(def ^:private -rad-conv (/ Math/PI
+                            180))
+
+
+(defn deg->rad
+
+  ""
+
+  [deg]
+
+  (* deg
+     -rad-conv))
+
 
 
 (defn high-dpi
