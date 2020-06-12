@@ -14,6 +14,7 @@
   [ctx]
 
   (-> ctx
+      (draw/alpha 0.5)
       (draw/color-fill "black")
       (draw/rect-fill 0 0 1000 400)
       (draw/color-fill "white")

@@ -214,6 +214,23 @@
 ;;;;;;;;;; Styling
 
 
+(defn alpha
+
+  ""
+
+  ([ctx]
+
+   (.-globalAlpha ctx))
+
+  
+  ([ctx percent]
+
+   (set! (.-globalAlpha ctx)
+         percent)
+   ctx))
+
+
+
 (defn color-fill
 
   ""
@@ -261,6 +278,23 @@
 
    (set! (.-strokeStyle ctx)
          color)
+   ctx))
+
+
+
+(defn composite-op
+
+  ""
+
+  ([ctx]
+
+   (.-globalCompositeOperation ctx))
+
+
+  ([ctx type]
+
+   (set! (.-globalCompositeOperation ctx)
+         type)
    ctx))
 
 
@@ -429,6 +463,23 @@
 
    (set! (.-shadowOffsetY ctx)
          y-offset)
+   ctx))
+
+
+
+(defn smoothing?
+
+  ""
+
+  ([ctx]
+
+   (.-imageSmoothingEnabled ctx))
+
+
+  ([ctx enabled?]
+
+   (set! (.-imageSmoothingEnabled ctx)
+         enabled)
    ctx))
 
 
