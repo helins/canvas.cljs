@@ -16,17 +16,12 @@
   (-> ctx
       (draw/color-fill "black")
       (draw/rect-fill 0 0 1000 400)
-      (draw/color-stroke "white")
+      (draw/color-fill "white")
+      (draw/color-stroke "grey")
       (draw/line-width 2)
-      draw/begin
-      (draw/line 0 0 300 100)
-      draw/stroke
-      draw/begin
-      (draw/color-stroke "green")
-      ;(draw/line 500 200)
-      (draw/bezier-1 600 0 900 50)
-      (draw/line 600 300)
-      draw/stroke
+      (draw/font "bold 200px serif")
+      (draw/text-fill 50 100 "Hello")
+      (draw/text-stroke 100 200 "Hello")
       ))
 
 

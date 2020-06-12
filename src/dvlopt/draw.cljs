@@ -262,14 +262,6 @@
 
 
 
-(def even-odd
-
-  ""
-
-  "evenodd")
-
-
-
 (defn fill
 
   ""
@@ -283,26 +275,6 @@
   ([ctx fill-rule]
 
    (.fill ctx
-          fill-rule)
-   ctx))
-
-
-
-(defn fill-path
-
-  ""
-
-  ([ctx path]
-
-   (fill-path ctx
-              path
-              nil))
-
-
-  ([ctx path fill-rule]
-
-   (.fill ctx
-          path
           fill-rule)
    ctx))
 
@@ -396,29 +368,6 @@
 
 
 
-(def non-zero
-
-  ""
-
-  "nonzero")
-
-
-
-(defn path
-
-  ""
-
-  ([]
-
-   (js/Path2D.))
-
-
-  ([source]
-   ;; Either an existing path which will be copied or a SVG path (string).
-   (js/Path2D. source)))
-
-
-
 (defn move
 
   ""
@@ -506,18 +455,10 @@
 
   ""
 
-  ([ctx]
+  [ctx]
 
    (.stroke ctx)
    ctx)
-
-
-  ([ctx path]
-
-   (.stroke ctx
-            path)
-   ctx))
-
 
 
 (defn style-pop
@@ -553,6 +494,7 @@
 
 
 
+
 (defn transform-reset
 
   ""
@@ -574,6 +516,156 @@
               x
               y)
   ctx)
+
+
+;;;;;;;;;; Paths
+
+
+(defn path
+
+  ""
+
+  ([]
+
+   (js/Path2D.))
+
+
+  ([source]
+   ;; Either an existing path which will be copied or a SVG path (string).
+   (js/Path2D. source)))
+
+
+
+(defn path-fill
+
+  ""
+
+  ([ctx path]
+
+   (path-fill ctx
+              path
+              nil))
+
+
+  ([ctx path fill-rule]
+
+   (.fill ctx
+          path
+          fill-rule)
+   ctx))
+
+
+
+(defn path-stroke
+
+  ""
+
+  [ctx path]
+
+  (.stroke ctx
+           path)
+  ctx)
+
+
+;;;;;;;;;; Text
+
+
+(defn font
+
+  ""
+
+  ([ctx]
+
+   (.-font ctx))
+
+
+  ([ctx new-font]
+
+   (set! (.-font ctx)
+         new-font)
+   ctx))
+
+
+
+(defn text-align
+
+  ""
+
+  ([ctx]
+
+   (.-textAlign ctx))
+
+
+  ([ctx align]
+
+   (set! (.-textAlign ctx)
+         align)
+   ctx))
+
+
+
+(defn text-baseline
+
+  ""
+
+  ([ctx]
+
+   (.-textBaseline ctx))
+
+
+  ([ctx baseline]
+
+   (set! (.-textBaseline ctx)
+         baseline)
+   ctx))
+
+
+
+(defn text-fill 
+
+  ""
+
+  ([ctx x y text]
+
+   (.fillText ctx
+              text
+              x
+              y)
+   ctx)
+
+
+  ([ctx x y text max-width]
+
+   (.fillText ctx
+              text
+              x
+              y
+              max-width)
+   ctx))
+
+
+
+(defn text-stroke 
+
+  ""
+
+  ([ctx x y text]
+
+   (.strokeText ctx
+                text
+                x
+                y)
+   ctx)
+
+
+  ([ctx x y text max-width]
+
+   (.strokeText ctx
+                text
+                x
+                y
+                max-width)
+   ctx))
 
 
 ;;;;;;;;;; Additional utilities
