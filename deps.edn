@@ -11,18 +11,18 @@
 
   :deploy
   {:extra-deps {deps-deploy {:mvn/version "0.0.9"}}
-   :main-opts  ["-m" "deps-deploy.deps-deploy" "deploy" "midiv_piano.jar"]}
+   :main-opts  ["-m" "deps-deploy.deps-deploy" "deploy" "draw.jar"]}
 
   :dev
   {:extra-paths ["dev"]}
 
   :jar
   {:extra-deps {seancorfield/depstar {:mvn/version "0.5.2"}}
-   :main-opts  ["-m" "hf.depstar.jar" "midiv_piano.jar"]}
+   :main-opts  ["-m" "hf.depstar.jar" "draw.jar"]}
 
   :install
   {:extra-deps {deps-deploy {:mvn/version "0.0.9"}}
-   :main-opts  ["-m" "deps-deploy.deps-deploy" "install" "midiv_piano.jar"]}
+   :main-opts  ["-m" "deps-deploy.deps-deploy" "install" "draw.jar"]}
 
   :test
   {:extra-deps  {lambdaisland/chui {:mvn/version "0.0.117"}}

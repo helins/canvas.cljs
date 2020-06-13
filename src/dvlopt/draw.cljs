@@ -131,8 +131,8 @@
 
   ([ctx]
 
-   (fill ctx
-         nil))
+   (.fill ctx)
+   ctx)
 
 
   ([ctx fill-rule]
@@ -373,9 +373,9 @@
 
   ([ctx path]
 
-   (path-fill ctx
-              path
-              nil))
+   (.fill ctx
+          path)
+   ctx)
 
 
   ([ctx path fill-rule]
