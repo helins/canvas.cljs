@@ -1,42 +1,22 @@
 (ns dvlopt.draw
 
-  ""
+  ;; Macros.
 
-  {:author "Adam Helinski"}
-
-  (:refer-clojure :exclude [->]))
+  {:author "Adam Helinski"})
 
 
 ;;;;;;;;;; Macros
 
 
-(defmacro ->
-
-  ""
-
-  [[ctx & args] & forms]
-
-  (let [pre-args  (cons ctx
-                        args)
-        syms      (take (count pre-args)
-                        (repeatedly gensym))]
-    `(let ~(vec (interleave syms
-                            pre-args))
-       ~@(map (fn add-pre-args [form]
-                (if (symbol? form)
-                  (list* form
-                         syms)
-                  (cons (first form)
-                        (concat syms
-                                (rest form)))))
-              forms)
-       ~(first syms))))
-
-
-
 (defmacro subspace
 
-  ""
+  "The transformation matrix is saved at the beginning of the macro and restored at the end so that any spatial
+   transformations are forgotten.
+
+   Specially useful when drawing standalone paths which typically require translation.
+
+   Cf. [[matrix]]
+	   [[path]]"
 
   [[ctx] & forms]
 
