@@ -1,5 +1,10 @@
 # Draw
 
+[![Clojars
+Project](https://img.shields.io/clojars/v/dvlopt/draw.svg)](https://clojars.org/dvlopt/draw)
+
+[![cljdoc badge](https://cljdoc.org/badge/dvlopt/draw)](https://cljdoc.org/d/dvlopt/draw)
+
 Provides a more Clojurescriptish access to the [Canvas
 API](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
 while remaining true to it.
@@ -20,9 +25,10 @@ person's abstraction is another person's garbage".
 
 ## Usage
 
-Prior knowledge of the Canvas API is preferred. However, the documentation
-clearly helps in acquainting oneself with it as pretty much all docstrings have
-links to the relevant functions and properties [described by the Canvas API in
+Prior knowledge of the Canvas API is preferred. However, the
+[documentation](https://cljdoc.org/d/dvlopt/draw) clearly helps in acquainting
+oneself with it as pretty much all docstrings have links to the relevant
+functions and properties [described by the Canvas API in
 MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
 
 Other than that, dare to be bold.
