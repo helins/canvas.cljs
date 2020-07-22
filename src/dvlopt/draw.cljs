@@ -93,13 +93,15 @@
 (defn clip
 
   "Turns the current path into the current clipping region. It replaces any previous clipping region.
+  
+   `fill-rule` is non-nilable.
 
    Cf. [.clip()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)"
 
   ([ctx]
 
-   (clip ctx
-         nil))
+   (.clip ctx)
+   ctx)
 
 
   ([ctx fill-rule]
@@ -371,7 +373,9 @@
 
 (defn path-clip
 
-  "Just like [[clip]], but clips the given path."
+  "Just like [[clip]], but clips the given path.
+  
+   `fill-rule` is non-nilable."
 
   ([ctx path]
 
