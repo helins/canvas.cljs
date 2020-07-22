@@ -46,9 +46,8 @@
 
   ([ctx]
 
-   (begin ctx
-          0
-          0))
+   (.beginPath ctx)
+   ctx)
 
 
   ([ctx x y]
