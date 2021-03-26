@@ -1,9 +1,9 @@
 # Canvas
 
 [![Clojars
-Project](https://img.shields.io/clojars/v/helins/canvas.svg)](https://clojars.org/helins/canvas)
+Project](https://img.shields.io/clojars/v/io.helins/canvas.svg)](https://clojars.org/io.helins/canvas)
 
-[![cljdoc badge](https://cljdoc.org/badge/helins/canvas)](https://cljdoc.org/d/helins/canvas)
+[![cljdoc badge](https://cljdoc.org/badge/io/helins/canvas)](https://cljdoc.org/d/io.helins/canvas)
 
 Provides a more Clojurescriptish access to the [Canvas
 API](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
@@ -27,7 +27,7 @@ person's abstraction is another person's garbage".
 ## Usage
 
 Prior knowledge of the Canvas API is preferred. However, the
-[documentation](https://cljdoc.org/d/helins/canvas) clearly helps in acquainting
+[documentation](https://cljdoc.org/d/io.helins/canvas) clearly helps in acquainting
 oneself with it as pretty much all docstrings have links to the relevant
 functions and properties [described by the Canvas API in
 MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
@@ -59,7 +59,7 @@ language, tend to be opiniated and often counterproductive for more serious
 projects.
 
 The exciting world of simulation happens to be an excellent way to understand
-animation. We recommend the [DSim](https://github.com/dvlopt/dsim.cljc) library
+animation. We recommend the [DSim](https://github.com/helins/dsim.cljc) library
 which was clearly built for such endaveours. Familiarizing oneself with it takes
 some learning curve as it invokes concept from simulation, possibly new to the
 user ones, but acquiring those concepts result in great flexibility and
