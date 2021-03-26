@@ -1,4 +1,9 @@
-(ns dvlopt.draw
+;; This Source Code Form is subject to the terms of the Mozilla Public
+;; License, v. 2.0. If a copy of the MPL was not distributed with this
+;; file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+
+(ns helins.canvas
 
   "An more idiomatic access to the Canvas API.
 
@@ -15,14 +20,12 @@
 
   {:author "Adam Helinski"}
 
-  (:require-macros [dvlopt.draw])
+  (:require [goog.dom])
+  (:require-macros [helins.canvas])
   ;;
   ;; <!> Attention, can be confusing if not kept in mind <!>
   ;;
   (:refer-clojure :exclude [contains?]))
-
-
-;; MAYBEDO. A nice API for ImageData?
 
 
 ;;;;;;;;;; Gathering declarations

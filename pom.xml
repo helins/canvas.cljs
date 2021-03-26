@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>dvlopt</groupId>
-  <artifactId>draw</artifactId>
+  <groupId>io.helins</groupId>
+  <artifactId>canvas</artifactId>
   <version>1.0.0-beta1</version>
   <name>Draw</name>
   <description>Accessing the Canvas API</description>
-  <url>https://github.com/dvlopt/draw.cljs</url>
+  <url>https://github.com/helins/canvas.cljs</url>
   <licenses>
     <license>
       <name>Eclipse Public License</name>
@@ -16,12 +16,14 @@
   <developers>
     <developer>
       <name>Adam Helinski</name>
+      <email>adam@helins.io</email>
+      <url>http://www.helins.io</url>
     </developer>
   </developers>
   <scm>
-    <url>https://github.com/dvlopt/draw.cljs</url>
-    <connection>scm:git:git://github.com/dvlopt/draw.cljs.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/dvlopt/draw.cljs.git</developerConnection>
+    <url>https://github.com/helins/canvas.cljs</url>
+    <connection>scm:git:git://github.com/helins/canvas.cljs.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/helins/canvas.cljs.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
   <dependencies>

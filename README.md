@@ -1,9 +1,9 @@
-# Draw
+# Canvas
 
 [![Clojars
-Project](https://img.shields.io/clojars/v/dvlopt/draw.svg)](https://clojars.org/dvlopt/draw)
+Project](https://img.shields.io/clojars/v/helins/canvas.svg)](https://clojars.org/helins/canvas)
 
-[![cljdoc badge](https://cljdoc.org/badge/dvlopt/draw)](https://cljdoc.org/d/dvlopt/draw)
+[![cljdoc badge](https://cljdoc.org/badge/helins/canvas)](https://cljdoc.org/d/helins/canvas)
 
 Provides a more Clojurescriptish access to the [Canvas
 API](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
@@ -23,15 +23,17 @@ software radically differs from a game, yet both might use a canvas.  This
 field is one where there is no "one size fits all". Or, as they say: "one
 person's abstraction is another person's garbage".
 
+
 ## Usage
 
 Prior knowledge of the Canvas API is preferred. However, the
-[documentation](https://cljdoc.org/d/dvlopt/draw) clearly helps in acquainting
+[documentation](https://cljdoc.org/d/helins/canvas) clearly helps in acquainting
 oneself with it as pretty much all docstrings have links to the relevant
 functions and properties [described by the Canvas API in
 MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
 
 Other than that, dare to be bold.
+
 
 ## Why not Quil?
 
@@ -45,6 +47,7 @@ lower-level operations and can become cumbersome for more serious projects. In
 those cases, we recommend sticking to direct access to the canvas without any
 additional layer as we believe it will be more fruitful, at least in the longer
 term.
+
 
 ## Animation
 
@@ -65,9 +68,9 @@ versatility.
 Tutorials showing how to combine both might be available in the future. However,
 the user shall be as compliant as to not hold his/her breath.
 
+
 ## License
 
 Copyright © 2020 Adam Helinski
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Licensed under the term of the Mozilla Public License 2.0, see LICENSE.
